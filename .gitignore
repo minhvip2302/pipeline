@@ -6,9 +6,10 @@ yarn-debug.log*
 yarn-error.log*
 firebase-debug.log*
 firebase-debug.*.log*
-
+serviceAccountKey.sjon
 # Firebase cache
 .firebase/
+jenkins_home/
 
 # Firebase config
 
