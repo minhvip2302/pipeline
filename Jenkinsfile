@@ -10,11 +10,6 @@ pipeline {
     //                  sortMode: 'DESCENDING_SMART'
     // }
     stages {
-        stage('Hello') {
-            steps {
-                sh 'echo "Building branch: ${branchName}"'
-            }
-        }
         // Uncomment and use the following stages as needed
         
         // stage('Checkout Code') {
@@ -29,13 +24,12 @@ pipeline {
         //     }
         // }
         
-        // stage('Deploy') {
-        //     steps {
-        //         withCredentials([file(credentialsId: 'firebase-jenkins-57747', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
-        //             sh "firebase deploy --only hosting --project=jenkins-57747"
-
-        //         }
-        //     }
-        // }
+        stage('Deploy') {
+            steps {
+                withCredentials([file(credentialsId: 'firebase-jenkins-57747', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
+                    sh "firebase deploy --only hosting --project=jenkins-57747"
+                }
+            }
+        }
     }
 }
