@@ -1,42 +1,47 @@
 pipeline {
     agent any
-
-    stages {
-        stage('Checkout') {
-            steps {
-                // Lấy mã nguồn từ repository
-                git url: 'https://github.com/anhtn98/web-performance-project1-initial.git', branch: 'main'
-            }
-        }
-        stage('Build') {
-            steps {
-                // Cài đặt Node.js và Firebase CLI
-                sh '''
-                npm install
-                npm run build
-                '''
-            }
-        }
-        stage('Deploy') {
-            steps {
-                // Đặt biến môi trường cho credentials
-                withCredentials([file(credentialsId: '9fc6f59f-3f3d-4045-9cb2-707d89c0ca76', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
-                    sh '''
-                    firebase deploy --only hosting --project=jenkins-57747
-                    '''
-                }
-            }
-        }
-    }
-
-    post {
-        // success {
-        //     // Gửi thông báo thành công
-        //     slackSend(channel: '#your-slack-channel', message: "Deploy thành công!")
+    // parameters {
+    //     gitParameter type: 'PT_BRANCH',
+    //                  name: 'BRANCH',
+    //                  defaultValue: 'main',
+    //                  description: 'Choose a branch to checkout',
+    //                  selectedValue: 'DEFAULT',
+    //                  branchFilter: 'origin/(.*)',
+    //                  sortMode: 'DESCENDING_SMART'
+    // }
+    // stages {
+        // stage('Checkout') {
+        //     steps {
+        //         script {
+        //             def branchName = env.BRANCH_NAME ?: env.GIT_BRANCH
+        //             echo "Building branch: ${branchName}"
+        //             // Checkout the specified branch
+        //             git branch: params.BRANCH,
+        //                 url: 'https://github.com/minhvip2302/pipeline.git'
+        //         }
+        //     }
         // }
-        // failure {
-        //     // Gửi thông báo thất bại
-        //     slackSend(channel: '#your-slack-channel', message: "Deploy thất bại!")
+        // Uncomment and use the following stages as needed
+        
+        // stage('Checkout Code') {
+        //     steps {
+        //         dir('/tmp/info') {
+        //             checkout scm: [
+        //                 $class: 'GitSCM',
+        //                 branches: [[name: "*/${params.BRANCH}"]],
+        //                 userRemoteConfigs: [[url: 'https://github.com/minhvip2302/pipeline.git']]
+        //             ]
+        //         }
+        //     }
         // }
-    }
+        
+        // stage('Deploy') {
+        //     steps {
+        //         withCredentials([file(credentialsId: 'firebase-jenkins-57747', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
+        //             sh "firebase deploy --only hosting --project=jenkins-57747"
+
+        //         }
+        //     }
+        // }
+    // }
 }
