@@ -32,18 +32,20 @@ pipeline {
             }
         }
     }
-    success {
-        emailext(
-            subject: "Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-            body: "The build was successful. Check it at ${env.BUILD_URL}",
-            to: 'anhnguyenbinhminh2302@gmail.com'
-        )
-    }
-    failure {
-        emailext(
-            subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-            body: "The build has failed. Check it at ${env.BUILD_URL}",
-            to: 'anhnguyenbinhminh2302@gmail.com'
-        )
+    post {
+        success {
+            emailext(
+                subject: "Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: "The build was successful. Check it at ${env.BUILD_URL}",
+                to: 'anhnguyenbinhminh2302@gmail.com'
+            )
+        }
+        failure {
+            emailext(
+                subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: "The build has failed. Check it at ${env.BUILD_URL}",
+                to: 'anhnguyenbinhminh2302@gmail.com'
+            )
+        }
     }
 }
