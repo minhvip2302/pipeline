@@ -9,18 +9,12 @@ pipeline {
     //                  branchFilter: 'origin/(.*)',
     //                  sortMode: 'DESCENDING_SMART'
     // }
-    // stages {
-        // stage('Checkout') {
-        //     steps {
-        //         script {
-        //             def branchName = env.BRANCH_NAME ?: env.GIT_BRANCH
-        //             echo "Building branch: ${branchName}"
-        //             // Checkout the specified branch
-        //             git branch: params.BRANCH,
-        //                 url: 'https://github.com/minhvip2302/pipeline.git'
-        //         }
-        //     }
-        // }
+    stages {
+        stage('Hello') {
+            steps {
+                sh 'echo "Building branch: ${branchName}"'
+            }
+        }
         // Uncomment and use the following stages as needed
         
         // stage('Checkout Code') {
@@ -43,5 +37,5 @@ pipeline {
         //         }
         //     }
         // }
-    // }
+    }
 }
